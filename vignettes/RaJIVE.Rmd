@@ -23,12 +23,12 @@ library("RaJIVE")
 We simulate data using the function jive.data.sim contained in the RaJIVE package: 
 
 ```{r}
-n <- 100
-pks <- c(200, 180, 100)
-Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(15, 12, 11), n = n,
+n <- 50
+pks <- c(100, 90, 50)
+Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(8, 6, 5), n = n,
                    pks = pks, dist.type = 1)
 
-initial_signal_ranks <- c(15,12,11)
+initial_signal_ranks <- c(8,6,5)
 data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
 
 ```
@@ -67,18 +67,18 @@ ajive_decomp$block_decomps[[3]]$individual$rank
   cond   <- sample(n, 0.1*n)
   
   Y_outliers1 <- Y$sim_data[[1]]
-  pstar1 <- sample(pks[1], pks[1]/5)
-  Y_outliers1[cond, pstar1] <- Y_outliers1[cond, pstar1] + rnorm(0.1*n*pstar1, 15 , 1)  
+  pstar1 <- sample(pks[1], pks[1]*0.05)
+  Y_outliers1[cond, pstar1] <- Y_outliers1[cond, pstar1] + rnorm(0.1*n*pstar1, 10 , 1)  
   
   
   Y_outliers2 <- Y$sim_data[[2]]
-  pstar2 <- sample(pks[2], pks[2]/5)
-  Y_outliers2[cond, pstar2] <- Y_outliers2[cond, pstar2] + rnorm(0.1*n*pstar2, 15 , 1)  
+  pstar2 <- sample(pks[2], pks[2]*0.05)
+  Y_outliers2[cond, pstar2] <- Y_outliers2[cond, pstar2] + rnorm(0.1*n*pstar2, 10 , 1)  
   
   
   Y_outliers3<- Y$sim_data[[3]]
-  pstar3 <- sample(pks[3], pks[3]/5)
-  Y_outliers3[cond, pstar3] <- Y_outliers3[cond, pstar3] + rnorm(0.1*n*pstar3, 15 , 1)  
+  pstar3 <- sample(pks[3], pks[3]*0.05)
+  Y_outliers3[cond, pstar3] <- Y_outliers3[cond, pstar3] + rnorm(0.1*n*pstar3, 10 , 1)  
   
   Y_outliers <- list(Y_outliers1, 
                      Y_outliers2, 
