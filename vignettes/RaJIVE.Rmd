@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>", 
+  cache=TRUE
 )
 ```
 
@@ -43,13 +44,6 @@ ajive_decomp <- ajive(data.ajive, initial_signal_ranks)
 
 ```
 
-aJIVE decomposition:
-
-```{r}
-ajive::decomposition_heatmaps(data.ajive, ajive_decomp)
-```
-
-
 
 Selected joint rank:
 ```{r}
@@ -63,30 +57,6 @@ ajive_decomp$block_decomps[[3]]$individual$rank
 ```
 
 
-
-## Robust aJIVE
-```{r}
-ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
-```
-
-```{r}
-library(ggplot2)
-decomposition_heatmaps_robustH(data.ajive, ajive.results.robust)
-```
-
-
-Selected joint rank:
-```{r}
-get_joint_rank(ajive.results.robust)
-
-```
-Selected individual ranks: 
-```{r}
-get_individual_rank(ajive.results.robust, 1)
-get_individual_rank(ajive.results.robust, 2)
-get_individual_rank(ajive.results.robust, 3)
-
-```
 ## Generate some outliers in the data
 
 ```{r}
@@ -125,12 +95,6 @@ ajive_decomp_out <- ajive(Y_outliers, initial_signal_ranks)
 
 ```
 
-aJIVE decomposition:
-
-```{r}
-ajive::decomposition_heatmaps(Y_outliers, ajive_decomp_out)
-```
-
 
 
 Selected joint rank:
@@ -147,13 +111,10 @@ ajive_decomp_out$block_decomps[[3]]$individual$rank
 
 
 ## Robust aJIVE
-```{r}
-ajive.results.robust.out <- Rajive(Y_outliers, initial_signal_ranks)
-```
+We run robust aJIVE: 
 
 ```{r}
-library(ggplot2)
-decomposition_heatmaps_robustH(Y_outliers, ajive.results.robust.out)
+ajive.results.robust.out <- Rajive(Y_outliers, initial_signal_ranks)
 ```
 
 
