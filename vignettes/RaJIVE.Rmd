@@ -23,12 +23,17 @@ library("RaJIVE")
 We simulate data using the function jive.data.sim contained in the RaJIVE package: 
 
 ```{r}
-n <- 50
-pks <- c(100, 90, 50)
-Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(8, 6, 5), n = n,
+n <- 100
+
+# dimension of data set 
+p1 <- 100
+p2 <- 180
+p3 <- 150
+pks <- c(p1, p2, p3)
+Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(10, 12, 7), n = n,
                    pks = pks, dist.type = 1)
 
-initial_signal_ranks <- c(8,6,5)
+initial_signal_ranks = c(10, 12, 7)
 data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
 
 ```
