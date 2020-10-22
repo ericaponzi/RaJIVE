@@ -10,9 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>", 
-  cache=TRUE
-)
+  comment = "#>" 
+  )
 ```
 
 ```{r setup}
@@ -23,6 +22,7 @@ library("RaJIVE")
 We simulate data using the function jive.data.sim contained in the RaJIVE package: 
 
 ```{r}
+set.seed(042020)
 n <- 100
 
 # dimension of data set 
