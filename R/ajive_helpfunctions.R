@@ -3,7 +3,7 @@
 #'
 #'
 #'
-#' @param decomposition X matrix.
+#' @param X X matrix.
 #' @param rank number rank of SVD decomposition
 #'
 #' @return The SVD of X.
@@ -137,10 +137,10 @@ wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=100
 #'
 #' Samples from the random direction bound. Returns on the scale of squared singular value.
 #'
-#' @param n_obs. The number of observations.
-#' @param n_features. The number of features in each data matrix
+#' @param n_obs The number of observations.
+#' @param dims The number of features in each data matrix
 #' @param num_samples Integer. Number of vectors selected for resampling procedure.
-#'
+#' @importFrom stats rnorm
 #' @return rand_dir_samples
 #'
 get_random_direction_bound <- function(n_obs, dims, num_samples=1000){

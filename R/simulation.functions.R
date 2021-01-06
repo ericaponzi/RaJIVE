@@ -14,6 +14,12 @@
 #' @export
 #'
 #' @examples
+#' n <- 20
+#' p1 <- 10
+#' p2 <- 8
+#' p3 <- 5
+#' JrankTrue <- 2
+#' initial_signal_ranks <- c(5, 2, 2)
 #'  Y <- jive.data.sim(K =3, rankJ = JrankTrue,
 #'  rankA = initial_signal_ranks,n = n,
 #'  pks = c(p1, p2, p3), dist.type = 1)
@@ -66,6 +72,10 @@ jive.data.sim <- function(K = 3, rankJ = 2,
 #' @param num Integer. Type of distribution. 1 for normal, 2 for uniform, 3 for exponential
 #' @param n Integer. Number of data points.
 #' @param p Integers. Number of variables in  block.
+#'
+#' @importFrom stats rnorm
+#' @importFrom stats runif
+#' @importFrom stats rexp
 #'
 sim_from_rand_dist <- function(num, n, p) {
   # simulate from a random distribution and output n x pk matrix

@@ -143,10 +143,10 @@ wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=100
 #' Samples from the random direction bound. Returns on the scale of squared singular value.
 #'
 #' @param n_obs The number of observations.
-#' @param n_features The number of features in each data matrix
+#' @param dims The number of features in each data matrix
 #' @param num_samples Integer. Number of vectors selected for resampling procedure.
+#' @importFrom stats rnorm
 #'
-#' @importFrom foreach %dopar%
 #' @return rand_dir_samples
 
 get_random_direction_bound_robustH <- function(n_obs, dims, num_samples=1000){
@@ -182,7 +182,6 @@ as.numeric(rand_dir_samples)
 #' @param ajive_output List. The decomposition from Rajive
 #' @param k Integer. The index of the data block
 #' @param type Character. Joint or individual
-#' @param normalized Boolean.
 #'
 #'
 #' @export
@@ -248,11 +247,6 @@ get_individual_rank <- function(ajive_output, k){
 #' @param jive_results_robust List. The RaJIVE decomposition.
 #'
 #' @export
-#' @examples
-#' blocks <- sample_toy_data(n=200, dx=100, dy=500)
-#' initial_signal_ranks <- c(2, 2)
-#' Rajive_decomp <- Rajive(blocks, initial_signal_ranks)
-#' decomposition_heatmaps_robustH(blocks, Rajive_decomp)
 
 
 
@@ -272,16 +266,31 @@ heatmap_listR <- list()
 for (k in 1:K) {
   heatmap_listR[[k]] <- data_heatmap(blocks[[k]], ylab = ifelse(k ==
                                                                   1, "observations", ""), show_color_bar = FALSE)
-  heatmap_listR[[K + k]] <- data_heatmap(ajive.results.robust$block_decomps[[3*(k-1)+2]][["full"]],
+  heatmap_listR[[K + k]] <- data_heatmap(jive_results_robust$block_decomps[[3*(k-1)+2]][["full"]],
                                          ylab = ifelse(k == 1, "joint", ""), show_color_bar = FALSE)
-  heatmap_listR[[2 * K + k]] <- data_heatmap(ajive.results.robust$block_decomps[[3*(k-1)+1]][["full"]],
+  heatmap_listR[[2 * K + k]] <- data_heatmap(jive_results_robust$block_decomps[[3*(k-1)+1]][["full"]],
                                              ylab = ifelse(k == 1, "individual", ""),
                                              show_color_bar = FALSE)
-  heatmap_listR[[3 * K + k]] <- data_heatmap(ajive.results.robust$block_decomps[[3*k]],
+  heatmap_listR[[3 * K + k]] <- data_heatmap(jive_results_robust$block_decomps[[3*k]],
                                              ylab = ifelse(k == 1, "noise", ""), show_color_bar = FALSE)
 }
 cowplot::plot_grid(plotlist = heatmap_listR, ncol = K)
 }
+
+#' Decomposition Heatmaps
+#'
+#' Visualization of the RaJIVE decomposition, it shows heatmaps of the decomposition obtained by RaJIVE
+#'
+#'
+#' @param data List. The initial data blocks.
+#' @param show_color_bar Boolean.
+#' @param title Character.
+#' @param xlab Character.
+#' @param ylab Character
+#'
+#' @import ggplot2
+#' @importFrom grDevices rainbow
+#' @export
 
 
 data_heatmap <- function (data, show_color_bar = TRUE, title = "", xlab = "",

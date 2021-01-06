@@ -33,6 +33,12 @@ jive.data.sim(
 Simulates blocks of data with joint and individual structures
 }
 \examples{
+n <- 20
+p1 <- 10
+p2 <- 8
+p3 <- 5
+JrankTrue <- 2
+initial_signal_ranks <- c(5, 2, 2)
  Y <- jive.data.sim(K =3, rankJ = JrankTrue,
  rankA = initial_signal_ranks,n = n,
  pks = c(p1, p2, p3), dist.type = 1)

@@ -104,6 +104,7 @@ get_sv_threshold <- function(singular_values, rank){
 #' @param n_wedin_samples Integer. Number of wedin bound samples to draw for each data matrix.
 #' @param n_rand_dir_samples Integer. Number of random direction bound samples to draw.
 #' @param joint_rank Integer or NA. User specified joint_rank. If NA will be estimated from data.
+#' @importFrom stats quantile
 #'
 #' @return Matrix. The joint scores.
 get_joint_scores <- function(blocks, block_svd, initial_signal_ranks, sv_thresholds,

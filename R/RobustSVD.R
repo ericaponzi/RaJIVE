@@ -4,8 +4,9 @@
 #'
 #'
 #' @param data Matrix. X matrix.
-#' @param rank Integer. Rank of SVD decomposition
+#' @param nrank Integer. Rank of SVD decomposition
 #' @param svdinit List. The standard SVD.
+#' @importFrom stats median
 #' @return List. The SVD of X.
 
 RobRSVD.all <- function(data, nrank = min(dim(data)), svdinit = svd(data))

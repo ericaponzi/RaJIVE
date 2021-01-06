@@ -19,10 +19,10 @@ Suggests: knitr,
     testthat,
     cowplot,
     reshape2,
-    GGally,
     dplyr, 
     ajive
 Imports: ggplot2, 
-	doParallel
+	doParallel,
+        foreach
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1

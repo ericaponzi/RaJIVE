@@ -9,9 +9,9 @@ RobRSVD.all(data, nrank = min(dim(data)), svdinit = svd(data))
 \arguments{
 \item{data}{Matrix. X matrix.}
 
-\item{svdinit}{List. The standard SVD.}
+\item{nrank}{Integer. Rank of SVD decomposition}
 
-\item{rank}{Integer. Rank of SVD decomposition}
+\item{svdinit}{List. The standard SVD.}
 }
 \value{
 List. The SVD of X.

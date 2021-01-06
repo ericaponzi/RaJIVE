@@ -9,9 +9,9 @@ get_random_direction_bound_robustH(n_obs, dims, num_samples = 1000)
 \arguments{
 \item{n_obs}{The number of observations.}
 
-\item{num_samples}{Integer. Number of vectors selected for resampling procedure.}
+\item{dims}{The number of features in each data matrix}
 
-\item{n_features}{The number of features in each data matrix}
+\item{num_samples}{Integer. Number of vectors selected for resampling procedure.}
 }
 \value{
 rand_dir_samples

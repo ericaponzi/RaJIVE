@@ -33,11 +33,11 @@ The aJIVE decomposition.
 Computes the robust aJIVE decomposition with parallel computation.
 }
 \examples{
-Y <- jive.data.sim(K =3, rankJ = 2,
-rankA = c(20, 12, 12), n = 100,
-pks = c(200, 180, 150), dist.type = 1)
-initial_signal_ranks <- c(20, 12, 12)
-blocks <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
-Rajive_decomp <- Rajive(blocks, initial_signal_ranks)
+#Y <- jive.data.sim(K =3, rankJ = 2,
+#rankA = c(20, 12, 12), n = 100,
+#pks = c(200, 180, 150), dist.type = 1)
+#initial_signal_ranks <- c(20, 12, 12)
+#blocks <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
+#Rajive_decomp <- Rajive(blocks, initial_signal_ranks)
 
 }

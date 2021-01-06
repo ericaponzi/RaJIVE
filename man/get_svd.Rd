@@ -7,9 +7,9 @@
 get_svd(X, rank = NULL)
 }
 \arguments{
-\item{rank}{number rank of SVD decomposition}
+\item{X}{X matrix.}
 
-\item{decomposition}{X matrix.}
+\item{rank}{number rank of SVD decomposition}
 }
 \value{
 The SVD of X.

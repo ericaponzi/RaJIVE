@@ -12,8 +12,6 @@ get_block_scores(ajive_output, k, type)
 \item{k}{Integer. The index of the data block}
 
 \item{type}{Character. Joint or individual}
-
-\item{normalized}{Boolean.}
 }
 \description{
 Gets the block scores from the Rajive decomposition
