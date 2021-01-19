@@ -35,6 +35,8 @@ devtools::install_github("ericaponzi/RaJIVE")
 This is a basic example which shows how to use RaJIVE on simple
 simulated data:
 
+### Running robust aJIVE
+
 ``` r
 library(RaJIVE)
 ## basic example code
@@ -52,7 +54,7 @@ The function returns a list containing the aJIVE decomposition, with the
 joint component (shared across data sources), individual component (data
 source specific) and residual component for each data source.
 
-Some instructions on how to visualize results:
+### Visualizing results:
 
   - Joint rank:
 
@@ -74,7 +76,7 @@ get_individual_rank(ajive.results.robust, 1)
 get_individual_rank(ajive.results.robust, 2)
 #> [1] 4
 get_individual_rank(ajive.results.robust, 3)
-#> [1] 1
+#> [1] 2
 ```
 
   - Heatmap decomposition:
@@ -88,11 +90,11 @@ get_individual_rank(ajive.results.robust, 3)
 ``` r
 showVarExplained_robust(ajive.results.robust, data.ajive)
 #> $Joint
-#> [1] 0.3729904 0.3592258 0.4957243
+#> [1] 0.3466038 0.3897388 0.5018044
 #> 
 #> $Indiv
-#> [1] 0.3798564 0.4387499 0.1591340
+#> [1] 0.4507182 0.4309863 0.2450095
 #> 
 #> $Resid
-#> [1] 0.2471533 0.2020243 0.3451417
+#> [1] 0.2026780 0.1792749 0.2531861
 ```
