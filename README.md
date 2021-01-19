@@ -48,12 +48,20 @@ data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
 ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
 ```
 
-Some instructions on how to visualize results: - Joint rank:
+The function returns a list containing the aJIVE decomposition, with the
+joint component (shared across data sources), individual component (data
+source specific) and residual component for each data source.
+
+Some instructions on how to visualize results:
+
+  - Joint rank:
+
+<!-- end list -->
 
 ``` r
 
 get_joint_rank(ajive.results.robust)
-#> [1] 2
+#> [1] 3
 ```
 
   - Individual ranks:
@@ -62,11 +70,11 @@ get_joint_rank(ajive.results.robust)
 
 ``` r
 get_individual_rank(ajive.results.robust, 1)
-#> [1] 6
+#> [1] 4
 get_individual_rank(ajive.results.robust, 2)
 #> [1] 4
 get_individual_rank(ajive.results.robust, 3)
-#> [1] 2
+#> [1] 1
 ```
 
   - Heatmap decomposition:
@@ -80,11 +88,11 @@ get_individual_rank(ajive.results.robust, 3)
 ``` r
 showVarExplained_robust(ajive.results.robust, data.ajive)
 #> $Joint
-#> [1] 0.2304304 0.2416727 0.3086197
+#> [1] 0.3729904 0.3592258 0.4957243
 #> 
 #> $Indiv
-#> [1] 0.6290337 0.5282924 0.3920659
+#> [1] 0.3798564 0.4387499 0.1591340
 #> 
 #> $Resid
-#> [1] 0.1405358 0.2300348 0.2993144
+#> [1] 0.2471533 0.2020243 0.3451417
 ```
