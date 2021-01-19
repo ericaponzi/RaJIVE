@@ -46,7 +46,7 @@ library(RaJIVE)
 ## basic example code
 n <- 50
 pks <- c(100, 80, 50)
-Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(7, 6, 4), n = n,
+Y <- ajive.data.sim(K =3, rankJ = 3, rankA = c(7, 6, 4), n = n,
                    pks = pks, dist.type = 1)
 
 initial_signal_ranks <-  c(7, 6, 4)

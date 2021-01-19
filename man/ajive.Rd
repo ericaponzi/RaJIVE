@@ -33,7 +33,7 @@ The aJIVE decomposition.
 Computes the aJIVE decomposition with parallel computation.
 }
 \examples{
-Y <- jive.data.sim(K =3, rankJ = 2,
+Y <- ajive.data.sim(K =3, rankJ = 2,
 rankA = c(20, 12, 12), n = 100,
 pks = c(200, 180, 150), dist.type = 1)
 initial_signal_ranks <- c(20, 12, 12)

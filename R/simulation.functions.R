@@ -20,7 +20,7 @@
 #' p3 <- 5
 #' JrankTrue <- 2
 #' initial_signal_ranks <- c(5, 2, 2)
-#'  Y <- jive.data.sim(K =3, rankJ = JrankTrue,
+#'  Y <- ajive.data.sim(K =3, rankJ = JrankTrue,
 #'  rankA = initial_signal_ranks,n = n,
 #'  pks = c(p1, p2, p3), dist.type = 1)
 
@@ -28,7 +28,7 @@
 
 
 
-jive.data.sim <- function(K = 3, rankJ = 2,
+ajive.data.sim <- function(K = 3, rankJ = 2,
                           rankA = c(20, 15, 10),
                           n = 100,
                           pks,
@@ -36,16 +36,16 @@ jive.data.sim <- function(K = 3, rankJ = 2,
 
   p <- sum(pks)
 
-  S <- sim_from_rand_dist(num = dist.type, n = n, p = rankJ)
-  U <- sim_from_rand_dist(num = dist.type, n = rankJ, p = p)
+  S <- sim_dist(num = dist.type, n = n, p = rankJ)
+  U <- sim_dist(num = dist.type, n = rankJ, p = p)
   J <- S %*% U
 
   Xs <- As <- list()
   idx <- 1
   for (k in 1:K) {
     rankAk <- rankA[k]
-    Sk <- sim_from_rand_dist(num = dist.type, n = n, p = rankAk)
-    Wk <- sim_from_rand_dist(num = dist.type, n = rankAk, p = pks[k])
+    Sk <- sim_dist(num = dist.type, n = n, p = rankAk)
+    Wk <- sim_dist(num = dist.type, n = rankAk, p = pks[k])
     Ak <- Sk %*% Wk
     As[[k]] <- Ak
 
@@ -54,10 +54,9 @@ jive.data.sim <- function(K = 3, rankJ = 2,
       matrix(rnorm(n = n*pks[k], mean = 0, sd = noise), nrow = n, ncol = pks[k])
     idx <- idx + pks[k]
   }
-  Sig <- J %*% t(J)
-  Deltks <- lapply(As, FUN = function(A) {return(t(A) %*% A)})
 
-  truth <- list(Sig_true = Sig, Deltks_true = Deltks, J_true = J,
+
+  truth <- list(J_true = J,
                 As_true = As, rankJ = rankJ, rankA = rankA)
   Xsim <- list(sim_data = Xs, truth = truth)
 
@@ -75,9 +74,8 @@ jive.data.sim <- function(K = 3, rankJ = 2,
 #'
 #' @importFrom stats rnorm
 #' @importFrom stats runif
-#' @importFrom stats rexp
 #'
-sim_from_rand_dist <- function(num, n, p) {
+sim_dist <- function(num, n, p) {
   # simulate from a random distribution and output n x pk matrix
   # num 1 for norm, 2 for unif, 3 for exp
 
@@ -86,8 +84,6 @@ sim_from_rand_dist <- function(num, n, p) {
     dist <- rnorm(n*p)
   }else if (num == 2) {
     dist <- runif(min=0, max=1, n=n*p)
-  }else if (num == 3) {
-    dist <- rexp(n=n*p, rate=1)
   }
   out <- matrix(dist, nrow = n, ncol = p)
   return(out)
