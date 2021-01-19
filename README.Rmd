@@ -51,7 +51,13 @@ ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
 
 ```
 
+
+The function returns a list containing the aJIVE decomposition, with the joint component (shared across data sources),  individual component (data source specific) and residual component for each data source. 
+
+
+
 Some instructions on how to visualize results: 
+
 - Joint rank: 
 
 ```{r ranks}
