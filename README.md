@@ -42,7 +42,7 @@ library(RaJIVE)
 ## basic example code
 n <- 50
 pks <- c(100, 80, 50)
-Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(7, 6, 4), n = n,
+Y <- ajive.data.sim(K =3, rankJ = 3, rankA = c(7, 6, 4), n = n,
                    pks = pks, dist.type = 1)
 
 initial_signal_ranks <-  c(7, 6, 4)
@@ -63,7 +63,7 @@ source specific) and residual component for each data source.
 ``` r
 
 get_joint_rank(ajive.results.robust)
-#> [1] 3
+#> [1] 2
 ```
 
   - Individual ranks:
@@ -72,7 +72,7 @@ get_joint_rank(ajive.results.robust)
 
 ``` r
 get_individual_rank(ajive.results.robust, 1)
-#> [1] 4
+#> [1] 5
 get_individual_rank(ajive.results.robust, 2)
 #> [1] 4
 get_individual_rank(ajive.results.robust, 3)
@@ -90,11 +90,11 @@ get_individual_rank(ajive.results.robust, 3)
 ``` r
 showVarExplained_robust(ajive.results.robust, data.ajive)
 #> $Joint
-#> [1] 0.3466038 0.3897388 0.5018044
+#> [1] 0.2593522 0.3434991 0.4227304
 #> 
 #> $Indiv
-#> [1] 0.4507182 0.4309863 0.2450095
+#> [1] 0.5531262 0.4515610 0.2835723
 #> 
 #> $Resid
-#> [1] 0.2026780 0.1792749 0.2531861
+#> [1] 0.1875216 0.2049399 0.2936973
 ```
