@@ -1,0 +1,82 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# RaJIVE
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+RaJIVE (Robust Angle based Joint and Individual Variation Explained) is a robust alternative to the aJIVE method for the estimation of joint and individual components in the presence of outliers in multi-source data. It decomposes the multi-source data into joint, individual and residual (noise) contributions. The decomposition is robust to outliers and noise in the data.
+
+## Installation
+
+You can install the released version of RaJIVE from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("RaJIVE")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("ericaponzi/RaJIVE")
+```
+## Example
+
+This is a basic example which shows how to use RaJIVE on simple simulated data: 
+
+```{r example}
+library(RaJIVE)
+## basic example code
+n <- 50
+pks <- c(100, 80, 50)
+Y <- jive.data.sim(K =3, rankJ = 3, rankA = c(7, 6, 4), n = n,
+                   pks = pks, dist.type = 1)
+
+initial_signal_ranks <-  c(7, 6, 4)
+data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
+ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+
+```
+
+Some instructions on how to visualize results: 
+- Joint rank: 
+
+```{r ranks}
+
+get_joint_rank(ajive.results.robust)
+
+```
+
+- Individual ranks: 
+
+```{r}
+get_individual_rank(ajive.results.robust, 1)
+get_individual_rank(ajive.results.robust, 2)
+get_individual_rank(ajive.results.robust, 3)
+```
+
+- Heatmap decomposition:
+
+```{r, echo = FALSE}
+decomposition_heatmaps_robustH(data.ajive, ajive.results.robust)
+```
+
+- Proportion of variance explained:
+
+```{r}
+showVarExplained_robust(ajive.results.robust, data.ajive)
+```
+

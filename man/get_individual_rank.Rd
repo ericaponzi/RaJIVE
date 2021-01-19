@@ -11,6 +11,9 @@ get_individual_rank(ajive_output, k)
 
 \item{k}{Integer. The index of the data block.}
 }
+\value{
+The individual ranks
+}
 \description{
 Gets the individual ranks from the Rajive decomposition
 }

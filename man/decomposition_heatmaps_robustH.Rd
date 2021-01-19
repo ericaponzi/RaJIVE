@@ -11,6 +11,9 @@ decomposition_heatmaps_robustH(blocks, jive_results_robust)
 
 \item{jive_results_robust}{List. The RaJIVE decomposition.}
 }
+\value{
+The heatmap of the decomposition
+}
 \description{
 Visualization of the RaJIVE decomposition, it shows heatmaps of the decomposition obtained by RaJIVE
 }

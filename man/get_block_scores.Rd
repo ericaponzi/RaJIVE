@@ -13,6 +13,9 @@ get_block_scores(ajive_output, k, type)
 
 \item{type}{Character. Joint or individual}
 }
+\value{
+The block scores
+}
 \description{
 Gets the block scores from the Rajive decomposition
 }

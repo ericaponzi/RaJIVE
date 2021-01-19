@@ -183,6 +183,7 @@ as.numeric(rand_dir_samples)
 #' @param k Integer. The index of the data block
 #' @param type Character. Joint or individual
 #'
+#' @return The block scores
 #'
 #' @export
 get_block_scores <- function(ajive_output, k, type){
@@ -203,6 +204,9 @@ get_block_scores <- function(ajive_output, k, type){
 #' @param k Integer. The index of the data block
 #' @param type Character. Joint or individual
 #'
+#' @return The block loadings
+#'
+#'
 #' @export
 get_block_loadings <- function(ajive_output, k, type){
   if(! type  %in% c('joint', 'individual')){
@@ -220,6 +224,8 @@ get_block_loadings <- function(ajive_output, k, type){
 #'
 #' @param ajive_output List. The decomposition from Rajive
 #'
+#' @return The joint rank
+#'
 #' @export
 get_joint_rank <- function(ajive_output){
   ajive_output$joint_rank
@@ -231,6 +237,10 @@ get_joint_rank <- function(ajive_output){
 #'
 #' @param ajive_output List. The decomposition from Rajive
 #' @param k Integer. The index of the data block.
+#'
+#'
+#' @return The individual ranks
+#'
 #' @export
 get_individual_rank <- function(ajive_output, k){
 
@@ -245,6 +255,8 @@ get_individual_rank <- function(ajive_output, k){
 #'
 #' @param blocks List. The initial data blocks.
 #' @param jive_results_robust List. The RaJIVE decomposition.
+#'
+#' @return The heatmap of the decomposition
 #'
 #' @export
 
@@ -313,4 +325,39 @@ data_heatmap <- function (data, show_color_bar = TRUE, title = "", xlab = "",
     theme(panel.background = element_blank(),  axis.line = element_blank(), legend.position = "bottom") +
     scale_y_continuous(expand = c(0, 0)) +
     scale_x_continuous(expand = c(0, 0)) + labs(title = title, x = xlab, y = ylab)
+}
+
+
+
+#' Proportions of variance explained
+#'
+#' Gets the variance explained by each component of the Rajive decomposition
+#'
+#' @param ajiveResults List. The decomposition from Rajive
+#' @param blocks List. The initial data blocks
+#'
+#' @return The proportion of variance explained by each component
+#'
+#' @export
+
+showVarExplained_robust <- function(ajiveResults, blocks){
+  l <- length(blocks)
+  # joint variance
+  # joint is the second component for all 3
+  VarJoint = rep(0, l)
+  for (i in 1:l) VarJoint[i] = norm(as.matrix(ajiveResults$block_decomps[[3*(i-1)+2]][[1]]),
+                                    type = "F")^2/norm(blocks[[i]], type = "F")^2
+
+  # individual variances
+  # individual is the first component for all 3
+  VarIndiv = rep(0, l)
+  for (i in 1:l) VarIndiv[i] = norm(as.matrix(ajiveResults$block_decomps[[3*(i-1)+1]][[1]]),
+                                    type = "F")^2/norm(blocks[[i]], type = "F")^2
+
+  # residual variance
+  VarSubtr = 1 - VarJoint - VarIndiv
+
+  VarProp <- list(VarJoint, VarIndiv, VarSubtr)
+  names(VarProp) <- c('Joint', 'Indiv', 'Resid')
+  VarProp
 }

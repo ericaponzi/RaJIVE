@@ -13,6 +13,9 @@ get_block_loadings(ajive_output, k, type)
 
 \item{type}{Character. Joint or individual}
 }
+\value{
+The block loadings
+}
 \description{
 Gets the block loadings from the Rajive decomposition
 }

@@ -9,6 +9,9 @@ get_joint_rank(ajive_output)
 \arguments{
 \item{ajive_output}{List. The decomposition from Rajive}
 }
+\value{
+The joint rank
+}
 \description{
 Gets the joint rank from the Rajive decomposition
 }

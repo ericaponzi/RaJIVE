@@ -14,12 +14,13 @@ Description: RaJIVE (Robust Angle based Joint and Individual Variation Explained
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.1.0)
-Suggests: knitr,
+Suggests: 
+    knitr,
     rmarkdown,
-    testthat,
+    testthat (>= 2.1.0),
     cowplot,
     reshape2,
-    dplyr, 
+    dplyr,
     ajive
 Imports: ggplot2, 
 	doParallel,
