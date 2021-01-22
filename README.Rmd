@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-RaJIVE (Robust Angle based Joint and Individual Variation Explained) is a robust alternative to the aJIVE method for the estimation of joint and individual components in the presence of outliers in multi-source data. It decomposes the multi-source data into joint, individual and residual (noise) contributions. The decomposition is robust to outliers and noise in the data.
+RaJIVE (Robust Angle based Joint and Individual Variation Explained) is a robust alternative to the aJIVE method for the estimation of joint and individual components in the presence of outliers in multi-source data. It decomposes the multi-source data into joint, individual and residual (noise) contributions. The decomposition is robust with respect to outliers and other types of noises present in the data.
 
 ## Installation
 
@@ -80,7 +80,7 @@ get_individual_rank(ajive.results.robust, 3)
 
 - Heatmap decomposition:
 
-```{r, echo = FALSE}
+```{r}
 decomposition_heatmaps_robustH(data.ajive, ajive.results.robust)
 ```
 
