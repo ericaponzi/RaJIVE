@@ -11,8 +11,8 @@ RaJIVE (Robust Angle based Joint and Individual Variation Explained) is
 a robust alternative to the aJIVE method for the estimation of joint and
 individual components in the presence of outliers in multi-source data.
 It decomposes the multi-source data into joint, individual and residual
-(noise) contributions. The decomposition is robust to outliers and noise
-in the data.
+(noise) contributions. The decomposition is robust with respect to
+outliers and other types of noises present in the data.
 
 ## Installation
 
@@ -63,7 +63,7 @@ source specific) and residual component for each data source.
 ``` r
 
 get_joint_rank(ajive.results.robust)
-#> [1] 2
+#> [1] 3
 ```
 
   - Individual ranks:
@@ -74,12 +74,18 @@ get_joint_rank(ajive.results.robust)
 get_individual_rank(ajive.results.robust, 1)
 #> [1] 5
 get_individual_rank(ajive.results.robust, 2)
-#> [1] 4
+#> [1] 3
 get_individual_rank(ajive.results.robust, 3)
-#> [1] 2
+#> [1] 1
 ```
 
   - Heatmap decomposition:
+
+<!-- end list -->
+
+``` r
+decomposition_heatmaps_robustH(data.ajive, ajive.results.robust)
+```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
@@ -90,11 +96,11 @@ get_individual_rank(ajive.results.robust, 3)
 ``` r
 showVarExplained_robust(ajive.results.robust, data.ajive)
 #> $Joint
-#> [1] 0.2593522 0.3434991 0.4227304
+#> [1] 0.3148569 0.3349692 0.4197429
 #> 
 #> $Indiv
-#> [1] 0.5531262 0.4515610 0.2835723
+#> [1] 0.5499653 0.4156423 0.1522468
 #> 
 #> $Resid
-#> [1] 0.1875216 0.2049399 0.2936973
+#> [1] 0.1351778 0.2493886 0.4280103
 ```
