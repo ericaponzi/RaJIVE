@@ -13,9 +13,9 @@
 #'
 #' @examples
 #' Y <- ajive.data.sim(K =3, rankJ = 2,
-#' rankA = c(20, 12, 12), n = 100,
-#' pks = c(200, 180, 150), dist.type = 1)
-#' initial_signal_ranks <- c(20, 12, 12)
+#' rankA = c(7, 6, 4), n = 50,
+#' pks = c(100, 80, 50), dist.type = 1)
+#' initial_signal_ranks <- c(7, 6, 4)
 #' blocks <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
 #' ajive_decomp <- ajive(blocks, initial_signal_ranks)
 #'

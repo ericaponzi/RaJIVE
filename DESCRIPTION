@@ -1,6 +1,6 @@
 Package: RaJIVE
-Title: Robust Angle based Joint and Individual Variation Explained
-Version: 0.0.0.9000
+Title: Robust Angle Based Joint and Individual Variation Explained
+Version: 1.0
 Authors@R: c(
     person(given = "Erica",
            family = "Ponzi",
@@ -9,8 +9,8 @@ Authors@R: c(
      person(given = "Abhik",
            family = "Ghosh",
            role = c("aut"),
-           email = "abhianik@gmail.com"))
-Description: RaJIVE (Robust Angle based Joint and Individual Variation Explained) <https://arxiv.org/abs/2101.09110> is a robust alternative to the aJIVE method for the estimation of joint and individual components in the presence of outliers in multi-source data. It decomposes the multi-source data into joint, individual and residual (noise) contributions. The decomposition is robust to outliers and noise in the data.
+           email = "abhik.ghosh.stat@gmail.com"))
+Description: A robust alternative to the aJIVE method (Feng et al 2018: <doi:10.1016/j.jmva.2018.03.008>) for the estimation of joint and individual components in the presence of outliers in multi-source data. It decomposes the multi-source data into joint, individual and residual (noise) contributions. The decomposition is robust to outliers and noise in the data. The method is illustrated in Ponzi et al (2021) <arXiv:2101.09110>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 3.1.0)
@@ -20,10 +20,8 @@ Suggests:
     testthat (>= 2.1.0),
     cowplot,
     reshape2,
-    dplyr,
-    ajive
+    dplyr
 Imports: ggplot2, 
 	doParallel,
         foreach
-VignetteBuilder: knitr
 RoxygenNote: 7.1.1
