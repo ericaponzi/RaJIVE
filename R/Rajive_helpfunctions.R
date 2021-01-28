@@ -113,7 +113,7 @@ wedin_bound_resampling <- function(X, perp_basis, right_vectors, num_samples=100
 
   rank <- dim(perp_basis)[2]
   #resampled_norms <- rep(0, num_samples)
-  numCores <- parallel::detectCores()-1
+  numCores <- 2
   doParallel::registerDoParallel(numCores)
   resampled_norms <- foreach::foreach (s=1:num_samples) %dopar% {
 
@@ -153,7 +153,7 @@ get_random_direction_bound_robustH <- function(n_obs, dims, num_samples=1000){
 
 dims1 = as.list(dims)
 n_blocks <- length(dims)
-numCores <- parallel::detectCores()-1
+numCores <- 2
 doParallel::registerDoParallel(numCores)
 
 rand_dir_samples <- foreach::foreach (s=1:num_samples, .export=c("get_svd_robustH", "RobRSVD.all", "RobRSVD1")) %dopar% {
@@ -185,13 +185,28 @@ as.numeric(rand_dir_samples)
 #'
 #' @return The block scores
 #'
+#' @examples
+#' \donttest{
+#'n <- 10
+#'pks <- c(20, 10)
+#'Y <- ajive.data.sim(K =2, rankJ = 2, rankA = c(7, 4), n = n,
+#'                  pks = pks, dist.type = 1)
+#'initial_signal_ranks <-  c(7, 4)
+#'data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]))
+#'ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#'get_block_scores(ajive.results.robust, 2, 'joint')
+#'}
 #' @export
+
+
 get_block_scores <- function(ajive_output, k, type){
   if(! type  %in% c('joint', 'individual')){
     stop('type must be: joint or individual')
   }
-  if (type == 'joint')   ajive_output$block_decomps[[3*(k-1)+2]]$u
-  if (type == 'individual')   ajive_output$block_decomps[[3*(k-1)+1]]$u
+  if (type == 'joint')   res <- ajive_output$block_decomps[[3*(k-1)+2]]$u
+  if (type == 'individual')   res <- ajive_output$block_decomps[[3*(k-1)+1]]$u
+  
+  return(res)
 
   }
 
@@ -205,16 +220,28 @@ get_block_scores <- function(ajive_output, k, type){
 #' @param type Character. Joint or individual
 #'
 #' @return The block loadings
-#'
+#' @examples 
+#'\donttest{
+#'n <- 10
+#'pks <- c(20, 10)
+#'Y <- ajive.data.sim(K =2, rankJ = 2, rankA = c(7, 4), n = n,
+#'                  pks = pks, dist.type = 1)
+#'initial_signal_ranks <-  c(7, 4)
+#'data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]))
+#'ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#'get_block_loadings(ajive.results.robust, 2, 'joint')
+#'}
+
 #'
 #' @export
 get_block_loadings <- function(ajive_output, k, type){
   if(! type  %in% c('joint', 'individual')){
     stop('type must be: joint or individual')
   }
- if (type == 'joint')   ajive_output$block_decomps[[3*(k-1)+2]]$v
-  if (type == 'individual')   ajive_output$block_decomps[[3*(k-1)+1]]$v
-}
+ if (type == 'joint')   res <- ajive_output$block_decomps[[3*(k-1)+2]]$v
+  if (type == 'individual')   res <- ajive_output$block_decomps[[3*(k-1)+1]]$v
+return(res)
+  }
 
 
 
@@ -225,7 +252,18 @@ get_block_loadings <- function(ajive_output, k, type){
 #' @param ajive_output List. The decomposition from Rajive
 #'
 #' @return The joint rank
-#'
+#' @examples  
+#'\donttest{
+#'n <- 10
+#'pks <- c(20, 10)
+#'Y <- ajive.data.sim(K =2, rankJ = 2, rankA = c(7, 4), n = n,
+#'                  pks = pks, dist.type = 1)
+#'initial_signal_ranks <-  c(7, 4)
+#'data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]))
+#'ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#'get_joint_rank(ajive.results.robust)
+#'}
+
 #' @export
 get_joint_rank <- function(ajive_output){
   ajive_output$joint_rank
@@ -241,6 +279,19 @@ get_joint_rank <- function(ajive_output){
 #'
 #' @return The individual ranks
 #'
+#'
+#' @examples 
+#' \donttest{
+#'n <- 10
+#'pks <- c(20, 10)
+#'Y <- ajive.data.sim(K =2, rankJ = 2, rankA = c(7, 4), n = n,
+#'                  pks = pks, dist.type = 1)
+#'initial_signal_ranks <-  c(7, 4)
+#'data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]))
+#'ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#'get_individual_rank(ajive.results.robust, 2)
+#'}
+
 #' @export
 get_individual_rank <- function(ajive_output, k){
 
@@ -258,6 +309,18 @@ get_individual_rank <- function(ajive_output, k){
 #'
 #' @return The heatmap of the decomposition
 #'
+#' @examples
+#' \donttest{
+#'n <- 10
+#'pks <- c(20, 10)
+#'Y <- ajive.data.sim(K =2, rankJ = 2, rankA = c(7, 4), n = n,
+#'                  pks = pks, dist.type = 1)
+#'initial_signal_ranks <-  c(7, 4)
+#'data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]))
+#'ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#'decomposition_heatmaps_robustH(data.ajive, ajive.results.robust)
+#'}
+
 #' @export
 
 
@@ -302,7 +365,6 @@ cowplot::plot_grid(plotlist = heatmap_listR, ncol = K)
 #'
 #' @import ggplot2
 #' @importFrom grDevices rainbow
-#' @export
 
 
 data_heatmap <- function (data, show_color_bar = TRUE, title = "", xlab = "",
@@ -337,6 +399,18 @@ data_heatmap <- function (data, show_color_bar = TRUE, title = "", xlab = "",
 #' @param blocks List. The initial data blocks
 #'
 #' @return The proportion of variance explained by each component
+#' 
+#' @examples 
+#' \donttest{
+#'n <- 10
+#'pks <- c(20, 10)
+#'Y <- ajive.data.sim(K =2, rankJ = 2, rankA = c(7, 4), n = n,
+#'                  pks = pks, dist.type = 1)
+#'initial_signal_ranks <-  c(7, 4)
+#'data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]))
+#'ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#'showVarExplained_robust(ajive.results.robust, data.ajive)
+#'}
 #'
 #' @export
 

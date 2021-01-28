@@ -10,6 +10,7 @@
 #' @param pks Vector of Integers. Number of variables in each block.
 #' @param dist.type Integer. 1 for normal, 2 for uniform, 3 for exponential
 #' @param noise Integer. Standard deviation in dist
+#' @return Xsim a list of simulated data matrices and true rank values
 #'
 #' @export
 #'

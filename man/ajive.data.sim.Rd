@@ -29,6 +29,9 @@ ajive.data.sim(
 
 \item{noise}{Integer. Standard deviation in dist}
 }
+\value{
+Xsim a list of simulated data matrices and true rank values
+}
 \description{
 Simulates blocks of data with joint and individual structures
 }

@@ -12,12 +12,15 @@
 #' @return The aJIVE decomposition.
 #'
 #' @examples
-#' #Y <- ajive.data.sim(K =3, rankJ = 2,
-#' #rankA = c(20, 12, 12), n = 100,
-#' #pks = c(200, 180, 150), dist.type = 1)
-#' #initial_signal_ranks <- c(20, 12, 12)
-#' #blocks <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
-#' #Rajive_decomp <- Rajive(blocks, initial_signal_ranks)
+#' \donttest{
+#' n <- 50
+#' pks <- c(100, 80, 50)
+#' Y <- ajive.data.sim(K =3, rankJ = 3, rankA = c(7, 6, 4), n = n,
+#'                    pks = pks, dist.type = 1)
+#' initial_signal_ranks <-  c(7, 6, 4)
+#' data.ajive <- list((Y$sim_data[[1]]), (Y$sim_data[[2]]), (Y$sim_data[[3]]))
+#' ajive.results.robust <- Rajive(data.ajive, initial_signal_ranks)
+#' }
 #'
 #' @export
 
@@ -97,7 +100,7 @@ get_sv_threshold <- function(singular_values, rank){
 #' @param n_wedin_samples Integer. Number of wedin bound samples to draw for each data matrix.
 #' @param n_rand_dir_samples Integer. Number of random direction bound samples to draw.
 #' @param joint_rank Integer or NA. User specified joint_rank. If NA will be estimated from data.
-#'
+#' @importFrom stats quantile
 #'
 #'
 #'
